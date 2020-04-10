@@ -5,7 +5,7 @@
 from Functions import base_dir, os
 
 
-def GUI(self, Gtk, GdkPixbuf, Gdk, th):
+def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
 
     self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
     self.add(self.vbox)
@@ -101,15 +101,16 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th):
     # ==========================================================
     #                       STATUS
     # ==========================================================
-    
+
     hbox5.pack_start(self.status, True, False, 0)
 
     # ==========================================================
     #                       RESOLUTION
     # ==========================================================
-    self.res = Gtk.Entry()
-    self.res.set_text("1920x1080")
-    self.res.set_width_chars(True)
+    self.res = Gtk.ComboBoxText()
+    for x in fn.resolutions:
+        self.res.append_text(x)
+    self.res.set_active(12)
     self.res.set_size_request(100, 0)
     label = Gtk.Label("Resolution")
     hbox4.pack_start(label, False, False, 0)
@@ -120,11 +121,22 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th):
     # ==========================================================
     #                       RESOLUTION
     # ==========================================================
-    self.blur = Gtk.Entry()
-    self.blur.set_text("1.0")
-    self.blur.set_max_length(4)
-    self.blur.set_width_chars(True)
-    self.blur.set_size_request(67, 0)
+    # self.blur = Gtk.Entry()
+    ad1 = Gtk.Adjustment(100, 0, 100, 1, 100, 0)
+
+    self.blur = Gtk.Scale(
+        orientation=Gtk.Orientation.HORIZONTAL, adjustment=ad1)
+    self.blur.set_digits(0)
+    self.blur.set_hexpand(True)
+    self.blur.set_draw_value(True)
+    # self.blur.set_has_origin(True)
+    self.blur.set_size_request(100, 0)
+    self.blur.set_valign(Gtk.Align.START)
+
+    # self.blur.set_text("1.0")
+    # self.blur.set_max_length(4)
+    # self.blur.set_width_chars(True)
+    # self.blur.set_size_request(67, 0)
     label = Gtk.Label("Blur intensity")
 
     hbox7.pack_start(label, False, False, 0)

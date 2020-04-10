@@ -65,10 +65,10 @@ class Main(Gtk.Window):
 
         splScr.destroy()
 
-        GUI.GUI(self, Gtk, GdkPixbuf, Gdk, th)
+        GUI.GUI(self, Gtk, GdkPixbuf, Gdk, th, fn)
 
     def on_apply_clicked(self, widget):
-
+        # print(str(int(self.blur.get_value())/100))
         if self.image_path is None:
             fn.show_in_app_notification(self,
                                         "You need to select an image first")
@@ -80,12 +80,12 @@ class Main(Gtk.Window):
             t.start()
 
     def set_lockscreen(self):
-        if len(self.res.get_text()) < 1:
+        if len(self.res.get_active_text()) < 1:
             command = ["betterlockscreen", "-u", self.image_path,
-                       "-b", self.blur.get_text()]
+                       "-b", str(int(self.blur.get_value())/100)]
         else:
             command = ["betterlockscreen", "-u", self.image_path,
-                       "-r", self.res.get_text(), "-b", self.blur.get_text()]
+                       "-r", self.res.get_active_text(), "-b", str(int(self.blur.get_value())/100)]
         try:
             with fn.subprocess.Popen(command, bufsize=1, stdout=fn.subprocess.PIPE, universal_newlines=True) as p:
                 for line in p.stdout:
