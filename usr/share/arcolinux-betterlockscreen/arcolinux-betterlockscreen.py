@@ -20,7 +20,7 @@ class Main(Gtk.Window):
         self.set_border_width(10)
         self.set_default_size(700, 460)
         self.set_icon_from_file(fn.os.path.join(
-            GUI.base_dir, 'images/hefftorlinux.svg'))
+            GUI.base_dir, 'images/arcolinux.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
 
         self.timeout_id = None
@@ -139,7 +139,7 @@ class Main(Gtk.Window):
         paths = fn.get_saved_path()
         if len(paths) < 1:
             if len(text) < 1:
-                paths = "/usr/share/backgrounds/hefftorlinux"
+                paths = "/usr/share/backgrounds/arcolinux"
                 if not fn.os.path.isdir(paths):
                     paths = "/usr/share/backgrounds/arcolinux"
                 if not fn.os.path.isdir(paths):

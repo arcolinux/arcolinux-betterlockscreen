@@ -8,7 +8,7 @@ from os.path import expanduser
 
 home = expanduser("~")
 base_dir = os.path.dirname(os.path.realpath(__file__))
-config = home + "/.config/hefftor-betterlockscreen-gui/"
+config = home + "/.config/arcolinux-betterlockscreen/"
 settings = "settings.conf"
 # ================================================
 #                   GLOBALS
