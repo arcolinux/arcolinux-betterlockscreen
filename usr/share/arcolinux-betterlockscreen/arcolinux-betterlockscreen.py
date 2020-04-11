@@ -20,6 +20,7 @@ class Main(Gtk.Window):
         super(Main, self).__init__(title="Betterlockscreen GUI")
         self.set_border_width(10)
         self.set_default_size(700, 460)
+        self.connect("delete-event", self.close)        
         self.set_icon_from_file(fn.os.path.join(
             GUI.base_dir, 'images/arcolinux.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -67,6 +68,10 @@ class Main(Gtk.Window):
         splScr.destroy()
 
         GUI.GUI(self, Gtk, GdkPixbuf, Gdk, th, fn)
+
+        with open("/tmp/bls.lock", "w") as f:
+            f.write("")
+            f.close()
 
     def on_support_clicked(self, widget):
         sup = Support.Support(self)
@@ -199,9 +204,18 @@ class Main(Gtk.Window):
         md.run()
         md.destroy()
 
+    def close(self, widget, data):
+        fn.os.unlink("/tmp/bls.lock")
+        Gtk.main_quit()
+
 
 if __name__ == "__main__":
-    w = Main()
-    w.connect("delete-event", Gtk.main_quit)
-    w.show_all()
-    Gtk.main()
+    if not fn.os.path.isfile("/tmp/bls.lock"):
+        with open("/tmp/bls.pid", "w") as f:
+            f.write(str(fn.os.getpid()))
+            f.close()
+        w = Main()
+        w.show_all()
+        Gtk.main()
+    else:
+        print("An instance of the application is running. Or the lock file is still present in /tmp/ \"bls.lock\"")
