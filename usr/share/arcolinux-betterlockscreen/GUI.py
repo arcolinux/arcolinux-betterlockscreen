@@ -18,6 +18,8 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
 
     hbox6 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
     hbox7 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+    
+    hbox8 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
 
     # =======================================================
     #                       App Notifications
@@ -55,6 +57,21 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     hbox6.pack_start(self.loc, False, False, 0)
     hbox6.pack_start(btnbrowse, False, False, 5)
     hbox6.pack_end(btnsearch, False, False, 0)
+
+    # ==========================================================
+    #                       LOCATIONS
+    # ==========================================================
+    lblS = Gtk.Label("Search: ")
+    self.search.set_size_request(180, 0)
+    btnsearcher = Gtk.Button(label="Search")
+
+    btnsearcher.connect("clicked", self.on_search_clicked)
+    
+    btnsearcher.set_size_request(130, 0)
+    hbox8.pack_end(btnsearcher, False, False, 0)    
+    hbox8.pack_end(self.search, False, False, 0)
+    hbox8.pack_end(lblS, False, False, 0)
+    
 
     # ==========================================================
     #                       BUTTON
@@ -153,6 +170,7 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
 
     self.vbox.pack_start(hbox1, False, False, 0)
     self.vbox.pack_start(hbox6, False, False, 0)
+    self.vbox.pack_start(hbox8, False, False, 0)
     self.vbox.pack_start(self.hbox3, True, True, 0)
     self.vbox.pack_start(hbox5, False, False, 0)
     self.vbox.pack_end(hbox2, False, False, 0)  # Patreon

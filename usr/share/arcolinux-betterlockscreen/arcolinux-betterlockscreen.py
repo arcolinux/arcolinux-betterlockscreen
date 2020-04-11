@@ -37,6 +37,7 @@ class Main(Gtk.Window):
                 f.close()
 
         self.loc = Gtk.Entry()
+        self.search = Gtk.Entry()
         self.status = Gtk.Label(label="")
         self.hbox3 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,
                              spacing=10)
@@ -127,6 +128,15 @@ class Main(Gtk.Window):
         t.daemon = True
         t.start()
 
+    def on_search_clicked(self, widget):
+        for x in self.fb.get_children():
+            self.fb.remove(x)
+
+        t = th.Thread(target=self.create_flowbox,
+                      args=(self.loc.get_text(),))
+        t.daemon = True
+        t.start()
+        
     def on_browse_clicked(self, widget):
         dialog = Gtk.FileChooserDialog(
                                        title="Please choose a file",
@@ -168,7 +178,7 @@ class Main(Gtk.Window):
             return 0
         try:
             ext = [".png", ".jpg", ".jpeg"]
-            images = [x for x in fn.os.listdir(paths) for j in ext if j in x.lower()] # noqa
+            images = [x for x in fn.os.listdir(paths) for j in ext if j in x.lower() if self.search.get_text() in x] # noqa
             GLib.idle_add(self.status.set_text, "Loading images...")
             for image in images:
                 # fbchild = Gtk.FlowBoxChild()
