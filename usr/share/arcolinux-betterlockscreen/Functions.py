@@ -3,6 +3,7 @@
 # =================================================================
 import os
 import subprocess
+import threading
 from gi.repository import GLib
 from os.path import expanduser
 

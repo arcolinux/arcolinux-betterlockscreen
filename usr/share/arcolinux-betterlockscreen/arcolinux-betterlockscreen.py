@@ -7,6 +7,7 @@
 import gi
 import Functions as fn
 import GUI
+import Support
 import threading as th
 import webbrowser
 import Splash
@@ -66,6 +67,13 @@ class Main(Gtk.Window):
         splScr.destroy()
 
         GUI.GUI(self, Gtk, GdkPixbuf, Gdk, th, fn)
+
+    def on_support_clicked(self, widget):
+        sup = Support.Support(self)
+        response = sup.run()
+
+        if response == Gtk.ResponseType.DELETE_EVENT:
+            sup.destroy()
 
     def on_apply_clicked(self, widget):
         # print(str(int(self.blur.get_value())/100))
