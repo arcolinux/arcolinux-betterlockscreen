@@ -4,7 +4,10 @@
 import os
 import subprocess
 import threading
-from gi.repository import GLib
+import psutil
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib, Gtk
 from os.path import expanduser
 
 home = expanduser("~")
@@ -75,3 +78,27 @@ def close_in_app_notification(self):
     self.notification_revealer.set_reveal_child(False)
     GLib.source_remove(self.timeout_id)
     self.timeout_id = None
+
+
+def MessageBox(self, title, message):
+    md2 = Gtk.MessageDialog(parent=self,
+                            flags=0,
+                            message_type=Gtk.MessageType.INFO,
+                            buttons=Gtk.ButtonsType.OK,
+                            text=title)
+    md2.format_secondary_markup(message)
+    md2.run()
+    md2.destroy()
+
+
+def checkIfProcessRunning(processName):
+    for proc in psutil.process_iter():
+        try:
+            pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+            if processName == pinfo['pid']:
+                return True
+        except (psutil.NoSuchProcess,
+                psutil.AccessDenied,
+                psutil.ZombieProcess):
+            pass
+    return False

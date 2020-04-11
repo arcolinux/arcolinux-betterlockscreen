@@ -172,7 +172,7 @@ class Main(Gtk.Window):
             GLib.idle_add(self.status.set_text, "Loading images...")
             for image in images:
                 # fbchild = Gtk.FlowBoxChild()
-                pb = GdkPixbuf.Pixbuf().new_from_file_at_size(paths + "/" + image, 128, 128) # noqa
+                pb = GdkPixbuf.Pixbuf().new_from_file_at_size(paths + "/" + image, 328, 328) # noqa
                 pimage = Gtk.Image()
                 pimage.set_name(paths + "/" + image)
                 pimage.set_from_pixbuf(pb)
@@ -218,4 +218,27 @@ if __name__ == "__main__":
         w.show_all()
         Gtk.main()
     else:
-        print("An instance of the application is running. Or the lock file is still present in /tmp/ \"bls.lock\"")
+        md = Gtk.MessageDialog(parent=Main(),
+                               flags=0,
+                               message_type=Gtk.MessageType.INFO,
+                               buttons=Gtk.ButtonsType.YES_NO,
+                               text="Lock File Found")
+        md.format_secondary_markup(
+            "The lock file has been found. This indicates there is already an instance of <b>ArcoLinux Betterlockscreen GUI</b> running.\n\
+click yes to remove the lock file and try running again")  # noqa
+
+        result = md.run()
+        md.destroy()
+
+        if result in (Gtk.ResponseType.OK, Gtk.ResponseType.YES):
+            pid = ""
+            with open("/tmp/bls.pid", "r") as f:
+                line = f.read()
+                pid = line.rstrip().lstrip()
+                f.close()
+
+            if fn.checkIfProcessRunning(int(pid)):
+                fn.MessageBox(Main(), "Application Running!",
+                                     "You first need to close the existing application")  # noqa
+            else:
+                fn.os.unlink("/tmp/bls.lock")
