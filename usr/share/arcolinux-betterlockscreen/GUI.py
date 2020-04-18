@@ -68,10 +68,9 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     btnsearcher.connect("clicked", self.on_search_clicked)
     
     btnsearcher.set_size_request(130, 0)
-    hbox8.pack_end(btnsearcher, False, False, 0)    
-    hbox8.pack_end(self.search, False, False, 0)
-    hbox8.pack_end(lblS, False, False, 0)
-    
+    hbox8.pack_start(lblS, False, False, 0)
+    hbox8.pack_start(self.search, False, False, 0)
+    hbox8.pack_start(btnsearcher, False, False, 0)    
 
     # ==========================================================
     #                       BUTTON
