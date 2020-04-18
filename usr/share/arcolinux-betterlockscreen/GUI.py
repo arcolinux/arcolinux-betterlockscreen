@@ -56,7 +56,7 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     hbox6.pack_start(lbl, False, False, 10)
     hbox6.pack_start(self.loc, False, False, 0)
     hbox6.pack_start(btnbrowse, False, False, 5)
-    hbox6.pack_end(btnsearch, False, False, 0)
+    hbox6.pack_start(btnsearch, False, False, 0)
 
     # ==========================================================
     #                       LOCATIONS
