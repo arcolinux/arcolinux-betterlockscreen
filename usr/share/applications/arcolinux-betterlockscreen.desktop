@@ -2,7 +2,7 @@
 Name=ArcoLinux Betterlockscreen
 GenericName=Betterlockscreen
 X-GNOME-FullName=Betterlockscreen
-Comment=Application for Changing betterlockscreen
+Comment=Application to change the image in betterlockscreen
 Exec=/usr/local/bin/arcolinux-betterlockscreen
 Icon=Betterlockscreen
 Terminal=false
