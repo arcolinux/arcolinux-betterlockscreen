@@ -17,10 +17,10 @@ from gi.repository import Gtk, GdkPixbuf, Gdk, GLib # noqa
 
 class Main(Gtk.Window):
     def __init__(self):
-        super(Main, self).__init__(title="Betterlockscreen GUI")
+        super(Main, self).__init__(title="ArcoLinux BetterLockScreen")
         self.set_border_width(10)
         self.set_default_size(700, 460)
-        self.connect("delete-event", self.close)        
+        self.connect("delete-event", self.close)
         self.set_icon_from_file(fn.os.path.join(
             GUI.base_dir, 'images/arcolinux.svg'))
         self.set_position(Gtk.WindowPosition.CENTER)
