@@ -136,7 +136,7 @@ class Main(Gtk.Window):
                       args=(self.loc.get_text(),))
         t.daemon = True
         t.start()
-        
+
     def on_browse_clicked(self, widget):
         dialog = Gtk.FileChooserDialog(
                                        title="Please choose a file",

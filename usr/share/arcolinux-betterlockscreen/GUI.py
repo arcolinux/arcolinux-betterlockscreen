@@ -167,9 +167,9 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     #                       PACK TO WINDOW
     # ==========================================================
 
-    self.vbox.pack_start(hbox1, False, False, 0)
-    self.vbox.pack_start(hbox6, False, False, 0)
-    self.vbox.pack_start(hbox8, False, False, 0)
-    self.vbox.pack_start(self.hbox3, True, True, 0)
-    self.vbox.pack_start(hbox5, False, False, 0)
-    self.vbox.pack_end(hbox2, False, False, 0)  # Patreon
+    self.vbox.pack_start(hbox1, False, False, 0)  # notify
+    self.vbox.pack_start(hbox6, False, False, 0)  # load row
+    self.vbox.pack_start(hbox8, False, False, 0)  # search row
+    self.vbox.pack_start(self.hbox3, True, True, 0)  # IMAGES
+    self.vbox.pack_start(hbox5, False, False, 0)  # status
+    self.vbox.pack_end(hbox2, False, False, 0)  # Settings row
