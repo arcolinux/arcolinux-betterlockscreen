@@ -48,8 +48,10 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     self.loc.set_size_request(280, 0)
     btnbrowse = Gtk.Button(label="...")
     btnsearch = Gtk.Button(label="Load")
+    btndefault = Gtk.Button(label="Default")
 
     btnsearch.connect("clicked", self.on_load_clicked, self.fb)
+    btndefault.connect("clicked", self.on_default_clicked, self.fb)
     btnbrowse.connect("clicked", self.on_browse_clicked)
 
     btnsearch.set_size_request(130, 0)
@@ -57,6 +59,7 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     hbox6.pack_start(self.loc, False, False, 0)
     hbox6.pack_start(btnbrowse, False, False, 5)
     hbox6.pack_start(btnsearch, False, False, 0)
+    hbox6.pack_end(btndefault, False, False, 0)
 
     # ==========================================================
     #                       LOCATIONS

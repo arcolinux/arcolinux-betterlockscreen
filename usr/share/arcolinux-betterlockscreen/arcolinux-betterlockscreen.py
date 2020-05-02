@@ -61,7 +61,7 @@ class Main(Gtk.Window):
             Gtk.main_iteration()
         # self.create_flowbox(self.loc.get_text())
         t = th.Thread(target=self.create_flowbox,
-                      args=(self.loc.get_text(),))
+                      args=(self.loc.get_text(), False))
         t.daemon = True
         t.start()
         t.join()
@@ -73,6 +73,17 @@ class Main(Gtk.Window):
         with open("/tmp/bls.lock", "w") as f:
             f.write("")
             f.close()
+
+    def on_default_clicked(self, widget, fb):
+        # self.fb.select_all()
+
+        for x in self.fb.get_children():
+            self.fb.remove(x)
+
+        t = th.Thread(target=self.create_flowbox,
+                      args=(self.loc.get_text(), True))
+        t.daemon = True
+        t.start()
 
     def on_support_clicked(self, widget):
         sup = Support.Support(self)
@@ -124,7 +135,7 @@ class Main(Gtk.Window):
             self.fb.remove(x)
 
         t = th.Thread(target=self.create_flowbox,
-                      args=(self.loc.get_text(),))
+                      args=(self.loc.get_text(), False))
         t.daemon = True
         t.start()
 
@@ -133,7 +144,7 @@ class Main(Gtk.Window):
             self.fb.remove(x)
 
         t = th.Thread(target=self.create_flowbox,
-                      args=(self.loc.get_text(),))
+                      args=(self.loc.get_text(), False))
         t.daemon = True
         t.start()
 
@@ -158,17 +169,24 @@ class Main(Gtk.Window):
         elif response == Gtk.ResponseType.CANCEL:
             dialog.destroy()
 
-    def create_flowbox(self, text):
-        paths = fn.get_saved_path()
-        if len(paths) < 1:
-            if len(text) < 1:
-                paths = "/usr/share/backgrounds/arcolinux"
-                if not fn.os.path.isdir(paths):
+    def create_flowbox(self, text, default):
+        if not default:
+            paths = fn.get_saved_path()
+            if len(paths) < 1:
+                if len(text) < 1:
                     paths = "/usr/share/backgrounds/arcolinux"
-                if not fn.os.path.isdir(paths):
-                    return 0
-            else:
-                paths = text
+                    if not fn.os.path.isdir(paths):
+                        paths = "/usr/share/backgrounds/arcolinux"
+                    if not fn.os.path.isdir(paths):
+                        return 0
+                else:
+                    paths = text
+        else:
+            paths = "/usr/share/backgrounds/arcolinux"
+            if not fn.os.path.isdir(paths):
+                paths = "/usr/share/backgrounds/arcolinux"
+            if not fn.os.path.isdir(paths):
+                return 0
 
         if paths.endswith("/"):
             paths = paths[:-1]
