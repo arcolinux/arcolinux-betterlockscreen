@@ -13,7 +13,7 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     hbox1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
     hbox2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
 
-    hbox4 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+    #hbox4 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
     hbox5 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
 
     hbox6 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
@@ -129,16 +129,16 @@ def GUI(self, Gtk, GdkPixbuf, Gdk, th, fn):
     # ==========================================================
     #                       RESOLUTION
     # ==========================================================
-    self.res = Gtk.ComboBoxText()
-    for x in fn.resolutions:
-        self.res.append_text(x)
-    self.res.set_active(12)
-    self.res.set_size_request(100, 0)
-    label = Gtk.Label("Resolution")
-    hbox4.pack_start(label, False, False, 0)
-    hbox4.pack_start(self.res, False, False, 0)
+    #self.res = Gtk.ComboBoxText()
+    #for x in fn.resolutions:
+    #    self.res.append_text(x)
+    #self.res.set_active(12)
+    #self.res.set_size_request(100, 0)
+    #label = Gtk.Label("Resolution")
+    #hbox4.pack_start(label, False, False, 0)
+    #hbox4.pack_start(self.res, False, False, 0)
 
-    hbox2.pack_start(hbox4, True, False, 0)
+    #hbox2.pack_start(hbox4, True, False, 0)
 
     # ==========================================================
     #                       RESOLUTION
