@@ -99,7 +99,7 @@ class Main(Gtk.Window):
                                         "You need to select an image first")
         else:
             self.btnset.set_sensitive(False)
-            self.status.set_text("applying lockscreen....")
+            self.status.set_text("creating lockscreen images....wait for the message at the top")
             t = th.Thread(target=self.set_lockscreen, args=())
             t.daemon = True
             t.start()
@@ -108,10 +108,10 @@ class Main(Gtk.Window):
         command = ["betterlockscreen", "-u", self.image_path,
                        "--blur", str(int(self.blur.get_value())/100)]
         try:
-            with fn.subprocess.Popen(command, bufsize=1, stdout=fn.subprocess.PIPE, universal_newlines=True) as p:
-                for line in p.stdout:
-                    GLib.idle_add(self.status.set_text, line.strip())
-            # fn.subprocess.call(command, shell=False)
+            #with fn.subprocess.Popen(command, bufsize=1, stdout=fn.subprocess.PIPE, universal_newlines=True) as p:
+            #    for line in p.stdout:
+            #        GLib.idle_add(self.status.set_text, line.strip())
+            fn.subprocess.call(command, shell=False)
             fn.show_in_app_notification(self, "Lockscreen set successfully")
             GLib.idle_add(self.btnset.set_sensitive, True)
             GLib.idle_add(self.status.set_text, "")
